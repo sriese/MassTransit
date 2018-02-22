@@ -368,11 +368,12 @@ This registers the bus with the container and set up the container as the defaul
 public void Configure(IApplicationBuilder app, 
             IHostingEnvironment env, 
             ILoggerFactory loggerFactory, 
-            IApplicationLifetime lifetime)
+            IApplicationLifetime lifetime,
+            IComponentContext component)
 {
     ...
     //resolve the bus from the container
-    var bus = container.Resolve<IBusControl>();
+    var bus = component.Resolve<IBusControl>();
     //start the bus
     var busHandle = TaskUtil.Await(() => bus.StartAsync());
 
